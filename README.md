@@ -1,5 +1,44 @@
 # madgh0st_infra
 # madgh0st Infra repository
+
+## HW4
+  * в отдельной ветке перенес файлы setupvpn.sh и cloud-bastion.ovpn в папку VPN 
+  * создание необходимых instances и firewall-rules (должна быть настроена учетная запись и прикркпление к проекту
+
+    gcloud compute instances create reddit-app\
+        --boot-disk-size=10GB \
+        --image-family ubuntu-1604-lts \
+        --image-project=ubuntu-os-cloud \
+        --machine-type=g1-small \
+        --tags puma-server \
+        --restart-on-failure \
+        --address=35.207.131.137 \
+        --network-tier=STANDARD
+
+    gcloud compute firewall-rules create default-puma-allow \
+        --allow tcp:9292 \
+        --source-ranges=0.0.0.0/0 \
+        --source-tags=puma-server
+
+  *  удалить созданное можно 
+
+    gcloud compute instances create reddit-app
+    gcloud compute firewall-rules create default-puma-allow
+
+  * Файлы (deploy.sh,install_mongodb.sh,install_ruby.sh) размещены в корне репозитория, что бы тесты проходили и тревис запускал у себя обертку
+  * создание файла для auto deploy
+
+     cat install_ruby.sh install_mongodb.sh deploy.sh | grep '^#!' -v
+
+     и к gcloud compute instances create reddit-app добавлем дополнительную опцию 
+     
+         --metadata-from-file startup-script=full_install.sh
+
+    пприложение доступно по адресу https://35.207.131.137:9292
+
+    testapp_IP = 35.207.131.137
+    testapp_port = 9292
+
 ## HW3
   * Прошел регистрацию в GCP
   * Добавил ssh_key в метаданные
