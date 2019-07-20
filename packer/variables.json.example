@@ -1,0 +1,5 @@
+{
+  "my_project" : "my project",
+  "my_zone": "google region",
+  "instance_type": "f1-micro"
+}
