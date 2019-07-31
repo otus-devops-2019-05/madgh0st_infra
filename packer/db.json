@@ -1,0 +1,26 @@
+{
+   "variables": {
+            "my_disk_type": "pd-ssd"
+   },
+
+
+   "builders": [
+         {
+           "type": "googlecompute",
+           "project_id": "{{user `my_project`}}",
+           "image_name": "reddit-db-{{timestamp}}",
+           "image_family": "reddit-db",
+           "source_image_family": "ubuntu-1604-lts",
+           "zone": "{{user `my_zone`}}",
+           "ssh_username": "appuser",
+           "machine_type": "{{user `instance_type`}}"
+         }
+    ],
+    "provisioners": [
+           {
+             "type": "shell",
+             "script": "scripts/install_mongodb.sh",
+             "execute_command": "{{.Path}}"
+           }
+     ]
+}
