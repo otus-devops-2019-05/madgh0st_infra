@@ -24,7 +24,7 @@ resource "google_compute_instance" "app" {
     type        = "ssh"
     user        = "appuser"
     agent       = false
-    private_key = "${file("~/.ssh/appuser.insecure")}"
+    private_key = "${file(var.ssh_private_key)}"
   }
 
   provisioner "file" {
@@ -46,7 +46,7 @@ resource "google_compute_instance" "app" {
 
 locals {
   install-app   = "echo Environment='DATABASE_URL=${var.database_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
-  noinstall-app = ""
+  noinstall-app = "echo no-app-install"
 }
 
 resource "google_compute_address" "app_ip" { name = "reddit-app-ip" }

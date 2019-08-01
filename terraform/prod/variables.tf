@@ -1,14 +1,11 @@
 variable project {
-  description = "Project name"
-  default     = "utopian-surface-244211"
+  description = "GCP Project name"
 }
 variable zone {
-  description = "Region"
-  default     = "europe-west1-b"
+  description = "GCP Zone"
 }
 variable region {
-  description = "Region"
-  default     = "europe-west1"
+  description = "GCP Region"
 }
 
 variable "app_disk_image" {

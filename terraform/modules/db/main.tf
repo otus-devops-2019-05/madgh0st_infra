@@ -21,7 +21,7 @@ resource "google_compute_instance" "db" {
     type        = "ssh"
     user        = "appuser"
     agent       = false
-    private_key = "${file("~/.ssh/appuser.insecure")}"
+    private_key = "${file(var.ssh_private_key)}"
   }
 
   provisioner "remote-exec" {
