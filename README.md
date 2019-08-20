@@ -1,6 +1,16 @@
 # madgh0st Infra repository
 
 [![Build Status](https://travis-ci.com/otus-devops-2019-05/madgh0st_infra.svg?branch=terraform-2)](https://travis-ci.com/otus-devops-2019-05/madgh0st)
+
+## HW8
+  * в прогоне простого плейбука и при выполнения
+      > ansible app -m command -a 'rm -rf ~/reddit'
+
+        - изменяется флаг "changed", т.к плейбуку приходится снова создавать директору и повторно клонировать репозиторий
+
+        * Задания со *
+           -  написал скрипт на питоне который парсит вывод gcloud compute instances и разбивает их на группы основании тегов
+
 ## HW7
   * Скрипт поднимает два инстанса:
       - один для mondoDB (берется из образа, в образе измененная конфигурация - порт 27017 открыт на всех интерфейсах)
