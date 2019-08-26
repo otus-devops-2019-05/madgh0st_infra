@@ -3,3 +3,13 @@ appserver ansible_host=35.189.218.226
 
 [db]
 dbserver ansible_host=35.241.136.12
+
+
+[test]
+test-linux ansible_host=192.168.205.143
+
+[test:vars]
+ansible_user=ghost
+private_key=~/.ssh/id_rsa
+ansible_become_method=su
+ansible_become_pass=4Y63qeYn

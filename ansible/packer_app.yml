@@ -1,0 +1,51 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+
+  vars:
+      soft:
+          - git
+          - ruby-full
+          - ruby-bundler
+          - build-essential
+
+      db_host: 192.168.205.143
+
+  tasks:
+    - name: Install required soft
+      apt:
+        name: "{{ soft }}"
+        state: present
+      tags: deploy-tag
+
+    - name: Fetch the latest version of application code
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/appuser/reddit
+        version: monolith # <-- Указываем нужную ветку
+      notify: reload puma
+
+    - name: Bundle install
+      bundler:
+        state: present
+        chdir: /home/appuser/reddit # <-- В какой директории выполнить команду bundle
+
+    - name: Add config for DB connection
+      template:
+          src: templates/db_config.j2
+          dest: /home/appuser/db_config
+      notify: reload puma
+
+    - name: Add unit file for Puma
+      copy:
+          src: files/puma.service
+          dest: /etc/systemd/system/puma.service
+      notify: reload puma
+
+    - name: enable puma
+      systemd: name=puma enabled=yes
+
+  handlers:
+    - name: reload puma
+      systemd: name=puma state=restarted
