@@ -23,14 +23,6 @@
         name: mongodb
         state: present
 
-    - name: Change mongo config file
-      become: true
-      template:
-        src: templates/mongod.conf.j2
-        dest: /etc/mongod.conf
-        mode: 0644
-      notify: restart mongo
-
   handlers:
     - name: restart mongo
-      systemd: name=puma state=restarted
+      systemd: name=mongodb state=restarted

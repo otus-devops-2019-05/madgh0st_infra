@@ -2,6 +2,23 @@
 
 [![Build Status](https://travis-ci.com/otus-devops-2019-05/madgh0st_infra.svg?branch=terraform-2)](https://travis-ci.com/otus-devops-2019-05/madgh0st)
 
+## HW9 
+  - при работе используем dynamic inventory. при работе формируем разные группы [reddit-app][reddit-db]
+    полученное ивнентори можно получить командой 
+
+      >  ansible-inventory --list  
+
+  - его использование прописано в файле ansible.conf
+     > "provisioners": [
+     >     {
+     >       "type": "ansible",
+     >       "playbook_file": "ansible/packer_db.yml"
+     >     }
+     >  ]
+
+  - используем playbooks при формировании images в качестве средства для provision
+  - создали разные варианты полной раскатки сайта на ruby c разделением на app и db
+
 ## HW8
   * в прогоне простого плейбука и при выполнения
       > ansible app -m command -a 'rm -rf ~/reddit'

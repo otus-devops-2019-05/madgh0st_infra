@@ -1,10 +1,10 @@
 ---
-- hosts: test
+- hosts: reddit-db
   gather_facts: yes
   become: yes
 
   vars:
-      mongo_bind_ip: 192.168.205.143
+      mongo_bind_ip: 0.0.0.0
   tasks:
     - name: Add mongo repo key
       apt_key:
@@ -26,10 +26,10 @@
       become: true
       template:
         src: templates/mongod.conf.j2
-        dest: /etc/mongod.conf
+        dest: /etc/mongodb.conf
         mode: 0644
       notify: restart mongo
 
   handlers:
     - name: restart mongo
-      systemd: name=puma state=restarted
+      systemd: name=mongodb state=restarted

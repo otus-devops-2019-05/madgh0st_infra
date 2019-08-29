@@ -27,13 +27,13 @@ resource "google_compute_instance" "db" {
     private_key = "${file(var.ssh_private_key)}"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo sed 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf > /tmp/mongod.conf",
-      "sudo mv /tmp/mongod.conf /etc/mongod.conf",
-      "sudo systemctl restart mongod.service",
-    ]
-  }
+  #provisioner "remote-exec" {
+  #  inline = [
+  #    "sudo sed 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf > /tmp/mongod.conf",
+  #    "sudo mv /tmp/mongod.conf /etc/mongod.conf",
+  #    "sudo systemctl restart mongod.service",
+  #  ]
+  #}
 }
 
 # Правило firewall
