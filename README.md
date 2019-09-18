@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.com/otus-devops-2019-05/madgh0st_infra.svg?branch=terraform-2)](https://travis-ci.com/otus-devops-2019-05/madgh0st)
 
+## HW10
+
+qwdq;wdlmqw;dlm
+
 ## HW9 
   - при работе используем dynamic inventory. при работе формируем разные группы [reddit-app][reddit-db]
     полученное ивнентори можно получить командой 
